@@ -121,7 +121,7 @@
         'obj_dir%': '<(PRODUCT_DIR)/obj.target',
         #'v8_base': '<(PRODUCT_DIR)/obj.target/tools/v8_gypfiles/libv8_snapshot.a',
       }],
-      ['target_arch=="x64" or target_arch=="arm64"', {
+      ['target_arch=="x64" or target_arch=="arm64" or target_arch=="riscv64"', {
         'v8_enable_pointer_compression': 1,
         'v8_enable_31bit_smis_on_64bit_arch': 1,
       }],
@@ -133,6 +133,9 @@
       }],
       ['OS=="linux" and target_arch=="arm" and <(building_nw)==1', {
         'sysroot': '<!(cd <(DEPTH) && pwd -P)/build/linux/debian_sid_arm-sysroot',
+      }],
+      ['OS=="linux" and target_arch=="riscv64" and <(building_nw)==1', {
+        'sysroot': '<!(cd <(DEPTH) && pwd -P)/build/linux/debian_sid_riscv64-sysroot',
       }],
       ['OS=="mac"', {
         'clang%': 1,
@@ -636,6 +639,10 @@
             'ldflags': [ '-pthreads' ],
             'cflags!': [ '-pthread' ],
             'ldflags!': [ '-pthread' ],
+          }],
+          [ 'target_arch=="riscv64"', {
+            'cflags': [ '-m64', '--target=riscv64-linux-gnu', '-mno-relax', '-mabi=lp64d' ],
+            'ldflags': [ '--target=riscv64-linux-gnu', '-mno-relax' ],
           }],
           [ 'node_shared=="true"', {
             'cflags': [ '-fPIC' ],
