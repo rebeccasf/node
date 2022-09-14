@@ -341,7 +341,7 @@
             }],
           ],
         },
-        'cflags': [ '-O3' ],
+        'cflags': [ '-O0' ],
         'conditions': [
           ['enable_lto=="true"', {
             'cflags': ['<(lto)'],
