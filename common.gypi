@@ -323,6 +323,7 @@
         },
       },
       'Release_Base': {
+        'defines': [ 'V8_ENABLE_CHECKS', '_HAS_ITERATOR_DEBUGGING=0' ],
         'abstract': 1,
         'variables': {
           'v8_enable_handle_zapping': 0,
