@@ -877,7 +877,7 @@
         #'src/tracing/agent.cc',
         #'src/tracing/node_trace_buffer.cc',
         #'src/tracing/node_trace_writer.cc',
-        #'src/tracing/trace_event.cc',
+        'src/tracing/trace_event.cc',
         #'src/tracing/traced_value.cc',
         'src/tty_wrap.cc',
         'src/udp_wrap.cc',

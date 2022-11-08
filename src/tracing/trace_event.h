@@ -72,7 +72,8 @@ enum CategoryGroupEnabledFlags {
 // for best performance when tracing is disabled.
 // const uint8_t*
 //     TRACE_EVENT_API_GET_CATEGORY_GROUP_ENABLED(const char* category_group)
-#define TRACE_EVENT_API_GET_CATEGORY_GROUP_ENABLED 
+#define TRACE_EVENT_API_GET_CATEGORY_GROUP_ENABLED \
+node::tracing::TraceEventHelper::GetCategoryGroupEnabled
 
 // Get the number of times traces have been recorded. This is used to implement
 // the TRACE_EVENT_IS_NEW_TRACE facility.
@@ -151,8 +152,7 @@ enum CategoryGroupEnabledFlags {
 // configuration for each isolate,
 // https://code.google.com/p/v8/issues/detail?id=4563
 #define INTERNAL_TRACE_EVENT_GET_CATEGORY_INFO_CUSTOM_VARIABLES(             \
-    category_group, atomic, category_group_enabled)
-#if 0
+    category_group, atomic, category_group_enabled)			\
 category_group_enabled =                                                \
       reinterpret_cast<const uint8_t*>(TRACE_EVENT_API_ATOMIC_LOAD(atomic)); \
   if (!category_group_enabled) {                                             \
@@ -162,7 +162,6 @@ category_group_enabled =                                                \
         atomic, reinterpret_cast<TRACE_EVENT_API_ATOMIC_WORD_VALUE>(         \
                     category_group_enabled));                                \
   }
-#endif
 
 #define INTERNAL_TRACE_EVENT_GET_CATEGORY_INFO(category_group)             \
   static TRACE_EVENT_API_ATOMIC_WORD INTERNAL_TRACE_EVENT_UID(atomic) {0}; \
